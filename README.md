@@ -1,2 +1,0 @@
-# GoSarawak
-tourism strategy website 
