@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+        <title>Feedback</title>
+        <meta charset = "UTF-8">
+        <meta name="author" content="Jun Hong TAY, Samuel Sie Yung WONG">
+        <meta name="description" content="GoSarawak">
+        <meta name="keywords" content="go, sarawak">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    
+        <script>
+        function validate(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var comment = document.getElementById("comment").value;
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var improvements = document.querySelectorAll('input[name="improvement"]:checked');
+
+            document.getElementById("msg1").innerHTML = "";
+            document.getElementById("msg2").innerHTML = "";
+            document.getElementById("msg3").innerHTML = "";
+            document.getElementById("msg4").innerHTML = "";
+            document.getElementById("msg5").innerHTML = "";
+            document.getElementById("msg6").innerHTML = "";
+            document.getElementById("msg7").innerHTML = "";
+            document.getElementById("msg8").innerHTML = "";
+
+            var email_filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            
+            var valid1 = valid2 = valid3 = valid4 = valid5 = valid6 = valid7 = valid8 = true;
+
+            if(name == ""){
+                document.getElementById("msg1").innerHTML = "Name cannot be empty";
+                valid1 = false;
+            }
+
+            if(email == ""){
+                document.getElementById("msg2").innerHTML = "Email cannot be empty";
+                valid2 = false;
+            }
+            else if(!email_filter.test(email)){
+                document.getElementById("msg2").innerHTML = "Invalid email address";
+                valid2 = false;
+            }
+
+            if(phone == ""){
+                document.getElementById("msg3").innerHTML = "Phone cannot be empty";
+                valid3 = false;
+            }
+
+            if(date == ""){
+                document.getElementById("msg4").innerHTML = "Date cannot be empty";
+                valid4 = false;
+            }
+
+            if(time == ""){
+                document.getElementById("msg5").innerHTML = "Time cannot be empty";
+                valid5 = false;
+            }
+
+            if(comment == ""){
+                document.getElementById("msg6").innerHTML = "Comment cannot be empty";
+                valid6 = false;
+            }
+
+            if(!gender){
+                document.getElementById("msg7").innerHTML = "Please select your gender";
+                valid7 = false;
+            }
+
+           if(improvements.length === 0){
+                document.getElementById("msg8").innerHTML = "Please select at least one aspects for improvement";
+                valid8 = false;
+            }
+
+            if(valid1 && valid2 && valid3 && valid4 && valid5 && valid6){
+                alert("Form Submitted");
+                event.target.form.submit();
+            }
+        }
+        </script>
+
+        
+    </head>
+
+    <body>
+        <header class="logo-header">
+            <img src="../images/logo.png" alt="GoSarawak" >
+        </header>
+
+        <nav class = "menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="nav-li dropdown">
+                    <a href="#">Destination Highlight</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="city.html">City</a></li>
+                            <li><a href="nature.html">Nature</a></li>
+                            <li><a href="adventure.html">Adventure</a></li>
+                        </ul>
+                </li>
+                <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+        </nav>
+
+        <section class="feedback-section">
+                <h1 class="title">Feedback</h1>
+                <p>Please give the suggestion and feedback for our website.</p>
+        </section>
+
+        <article class="feedback-details">
+            <form action="submit_feedback.php" method="post" class="feedback-form">
+                    <fieldset class="fieldset-class">
+                    <legend class="feedback-legend">Personal Details</legend>
+
+                        <div class="feedback-list">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" placeholder="Include your first and last name" s id="name">
+                            <p id="msg1" class="error" ></p>   
+                        </div>
+
+                        <div class="feedback-list">
+                            <label>Gender:</label>
+                    
+                        <div class="checkbox-option">
+                            <input type="radio" name="gender" value="male" id="male">
+                            <label for="male">Male</label>
+                        </div>
+
+                        <div class="checkbox-option">
+                            <input type="radio" name="gender" value="female" id="female">
+                            <label for="female">Female</label>
+                        </div>
+
+                            <p id="msg7" class="error"></p>
+                        </div>    
+
+                        <div class="feedback-list">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" placeholder="abc@gmail.com" id="email">
+                            <p class="error" id="msg2"></p>
+                        </div>    
+
+                        <div class="feedback-list">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" name="phone" placeholder="012-3456789" id="phone">
+                            <p class="error" id="msg3"></p>
+                        </div>
+
+                        <div class="feedback-list">
+                            <label for="date">Date of Visit:</label>
+                            <input type="date" name="date" id="date">
+                            <p class="error" id="msg4"></p>
+                        </div>    
+
+                        <div class="feedback-list">
+                            <label for="time">Time of Visit:</label>
+                            <input type="time" name="time" id="time">
+                            <p class="error" id="msg5"></p>
+                        </div>
+
+                        <div class="feedback-list">
+                            <label>Which aspects of the website do you think need improvement?</label>
+
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="improvement" value="content" id="content">
+                                    <label for="content">Content</label>
+                                </div>
+
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="improvement" value="design" id="design">
+                                    <label for="design">Design</label>
+                                </div>
+
+                                <div class="checkbox-option">
+                                    <input type="checkbox" name="improvement" value="speed" id="speed">
+                                    <label for="speed">Speed</label>
+                                </div>
+
+                            <p id="msg8" class="error"></p>
+                        </div>    
+
+                        <div class="feedback-list">
+                            <label for="comment">Comment: </label>
+                            <textarea name="comment" placeholder="Enter your comment here" rows="6" cols="40"  id="comment"></textarea>
+                            <p class="error" id="msg6"></p>         
+                        </div>
+                </fieldset>
+
+                <div class="submit-button">
+                    <button type="submit" id="submit" onclick="validate(event)">Submit</button>
+                </div>
+
+            </form>
+        </article>    
+
+      <footer>
+            <div class="footer-container">
+                <!-- Contact Us Section -->
+                <div class="footer-section">
+                    <h5>Contact Us</h5>
+                    <p>Email: johnhtay649@gmail.com</p>
+                    <p>Phone: +60167451099</p>
+                    <p>Address: Jalan Tungah, 93350 Kuching,Sarawak, Malaysia</p>
+                </div>
+
+                <!-- Destination Highlight Section -->
+                <div class="footer-section">
+                <h5>Destination Highlight</h5>
+                <ul>
+                    <li><a href="city.html">City</a></li>
+                    <li><a href="nature.html">Nature</a></li>
+                    <li><a href="adventure.html">Adventure</a></li>
+                </ul>
+                </div>
+            </div>
+            
+            <div class="bottom">
+                <p>&copy; Group4 | Last updated: 23/05/2025</p>
+            </div>
+        </footer>
+    </body>
+</html>
